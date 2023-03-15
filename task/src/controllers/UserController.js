@@ -21,15 +21,15 @@ import users from "../data/users.js";
  * - Gunakan promise untuk handle asynchronous.
  */
 const formatUser = (title) => {
+    const nama = users.map((user) => {
+        return { 
+            ...user,
+            name : `${title}. ${user.name}`
+        };
+    });
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            for (let i = 0; i <users.length; i++){
-                const nama = users.map(function(elm) {
-                    return `${title}.${elm.name}`;
-                });
-                users[i].name = nama[i];
-            };
-            resolve(users);
+            resolve(nama);
         }, 3000);
     });
 };
@@ -46,7 +46,7 @@ const findByName = (name) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const cariUser = users.find(function (user){
-                return user.name = `${name}`;
+                return user.name === `${name}`;
             });
             resolve(cariUser);
         }, 4000);
@@ -71,7 +71,7 @@ const filterByMajor = (major) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const cariJurusan = users.filter(function (user){
-                return user.major = `${major}`;
+                return user.major === `${major}`;
             });
             resolve(cariJurusan);
         }, 2000);
